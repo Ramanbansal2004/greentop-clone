@@ -1,15 +1,62 @@
+import TestimonialCard from "./components/TestimonialCard";
 export default function Home() {
   const cards = [
     { link: "https://www.google.com", seed: "one", title: "Fences & Decks" },
     { link: "https://www.bbc.com", seed: "two", title: "Landscaping" },
-    { link: "https://www.wikipedia.org", seed: "three", title: "Outdoor Lighting" },
+    {
+      link: "https://www.wikipedia.org",
+      seed: "three",
+      title: "Outdoor Lighting",
+    },
     { link: "https://www.apple.com", seed: "four", title: "Pergolas" },
-    { link: "https://www.microsoft.com", seed: "five", title: "Retaining Walls" },
+    {
+      link: "https://www.microsoft.com",
+      seed: "five",
+      title: "Retaining Walls",
+    },
     { link: "https://www.openai.com", seed: "six", title: "Custom Patios" },
+  ];
+  const testimonials = [
+    {
+      text: "I really like how Cursor suggests edits to existing code. It noticed I was inconsistent with my markup and popped up this suggestion that matched my other items!",
+      name: "Wes Bos",
+      company: "Internet",
+      avatar: "/avatars/wes.jpg",
+    },
+    {
+      text: "I installed Cursor … oh",
+      name: "Kent C. Dodds",
+      company: "Internet",
+      avatar: "/avatars/kent.jpg",
+    },
+    {
+      text: "Cursor is awesome! Someone finally put GPT into a code editor in a seamless way.",
+      name: "Andrew McCalip",
+      company: "Varda",
+      avatar: "/avatars/andrew.jpg",
+    },
+    {
+      text: "After many recommendations, I finally switched from VSC to Cursor and … wow!",
+      name: "Johannes Schickling",
+      company: "Internet",
+      avatar: "/avatars/johannes.jpg",
+    },
+    {
+      text: "Cursor is at least a 2x improvement over Copilot. It's amazing having an AI pair programmer.",
+      name: "Ben Bernard",
+      company: "Internet",
+      avatar: "/avatars/ben.jpg",
+    },
+    {
+      text: "Cursor is the best AI developer tool right now, avoid it at your own peril",
+      name: "Someone",
+      company: "Internet",
+      avatar: "/avatars/default.jpg",
+    },
   ];
 
   return (
-    <div className="min-h-screen px-4 py-16 flex flex-col items-center">
+    <div className="min-h-screen py-16 flex flex-col items-center w-full">
       <p
         className="text-center text-[18px] font-medium"
         style={{ color: "#568203" }}
@@ -36,7 +83,9 @@ export default function Home() {
 
             {/* Overlay */}
             <div className="absolute inset-0 bg-[#568203] flex flex-col items-center justify-center text-center px-4 -translate-x-full group-hover:translate-x-0 transition-transform duration-1000">
-              <h1 className="text-white text-xl font-bold mb-4">{card.title}</h1>
+              <h1 className="text-white text-xl font-bold mb-4">
+                {card.title}
+              </h1>
               <a
                 href={card.link}
                 target="_blank"
@@ -48,6 +97,19 @@ export default function Home() {
             </div>
           </div>
         ))}
+      </div>
+      <div className="w-full mt-24 bg-[#568203] px-4 sm:px-8 lg:px-16 py-10">
+        <div className="text-center mb-10">
+          <h2 className="text-3xl font-bold text-gray-800">
+            What Client Says
+          </h2>
+        </div>
+
+        <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+          {testimonials.map((t, idx) => (
+            <TestimonialCard key={idx} {...t} />
+          ))}
+        </div>
       </div>
     </div>
   );
