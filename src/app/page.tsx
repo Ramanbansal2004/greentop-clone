@@ -18,16 +18,28 @@ export default function Home() {
   ];
   const testimonials = [
     {
+      text: "y dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, bu",
+      name: "Wes Bos",
+      company: "Internet",
+      avatar: "/avatars/wes.jpg",
+    },
+    {
+      text: "y dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, bu",
+      name: "Kent C. Dodds",
+      company: "Internet",
+      avatar: "/avatars/kent.jpg",
+    },
+    {
       text: "I really like how Cursor suggests edits to existing code. It noticed I was inconsistent with my markup and popped up this suggestion that matched my other items!",
       name: "Wes Bos",
       company: "Internet",
       avatar: "/avatars/wes.jpg",
     },
     {
-      text: "I installed Cursor … oh",
-      name: "Kent C. Dodds",
+      text: "I really like how Cursor suggests edits to existing code. It noticed I was inconsistent with my markup and popped up this suggestion that matched my other items!",
+      name: "Wes Bos",
       company: "Internet",
-      avatar: "/avatars/kent.jpg",
+      avatar: "/avatars/wes.jpg",
     },
     {
       text: "Cursor is awesome! Someone finally put GPT into a code editor in a seamless way.",
@@ -52,6 +64,12 @@ export default function Home() {
       name: "Someone",
       company: "Internet",
       avatar: "/avatars/default.jpg",
+    },
+    {
+      text: "I really like how Cursor suggests edits to existing code. It noticed I was inconsistent with my markup and popped up this suggestion that matched my other items!",
+      name: "Wes Bos",
+      company: "Internet",
+      avatar: "/avatars/wes.jpg",
     },
   ];
 
@@ -98,18 +116,24 @@ export default function Home() {
           </div>
         ))}
       </div>
-      <div className="w-full mt-24 bg-[#568203] px-4 sm:px-8 lg:px-16 py-10">
+      <div className="w-full mt-24 px-10 sm:px-8 lg:px-16">
         <div className="text-center mb-10">
-          <h2 className="text-3xl font-bold text-gray-800">
-            What Client Says
-          </h2>
+          <h2 className="text-3xl font-bold text-gray-800">What Client Says</h2>
         </div>
 
-        <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-          {testimonials.map((t, idx) => (
-            <TestimonialCard key={idx} {...t} />
+        <div className="w-full overflow-visible py-10">
+  <div className="flex flex-col sm:flex-row gap-6">
+    {[0, 1, 2].map((colIdx) => (
+      <div key={colIdx} className="flex-1 flex flex-col gap-3">
+        {testimonials
+          .filter((_, idx) => idx % 3 === colIdx)
+          .map((t, idx) => (
+            <TestimonialCard key={`${colIdx}-${idx}`} {...t} />
           ))}
-        </div>
+      </div>
+    ))}
+  </div>
+</div>
       </div>
     </div>
   );
