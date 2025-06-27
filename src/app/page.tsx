@@ -1,4 +1,5 @@
 import TestimonialCard from "./components/TestimonialCard";
+import CarouselComponent from "./components/CarouselComponent";
 export default function Home() {
   const cards = [
     { link: "https://www.google.com", seed: "one", title: "Fences & Decks" },
@@ -122,18 +123,21 @@ export default function Home() {
         </div>
 
         <div className="w-full overflow-visible py-10">
-  <div className="flex flex-col sm:flex-row gap-6">
-    {[0, 1, 2].map((colIdx) => (
-      <div key={colIdx} className="flex-1 flex flex-col gap-3">
-        {testimonials
-          .filter((_, idx) => idx % 3 === colIdx)
-          .map((t, idx) => (
-            <TestimonialCard key={`${colIdx}-${idx}`} {...t} />
-          ))}
+          <div className="flex flex-col sm:flex-row gap-6">
+            {[0, 1, 2].map((colIdx) => (
+              <div key={colIdx} className="flex-1 flex flex-col gap-3">
+                {testimonials
+                  .filter((_, idx) => idx % 3 === colIdx)
+                  .map((t, idx) => (
+                    <TestimonialCard key={`${colIdx}-${idx}`} {...t} />
+                  ))}
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
-    ))}
-  </div>
-</div>
+      <div>
+            <CarouselComponent />
       </div>
     </div>
   );
