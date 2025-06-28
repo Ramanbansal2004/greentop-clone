@@ -17,7 +17,7 @@ const services = [
     title: "Snow Removal",
     image:
       "https://circlelandscapes.ca/uploads/service/Snow Removal and Winter Maintenance_1714924520.png",
-    description: "We provide quick and efficient snow removal services...",
+    description: "unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but als",
     link: "https://circlelandscapes.ca/service/snow-removal-and-winter-property-care",
   },
   {
@@ -46,18 +46,18 @@ export default function CarouselComponent() {
   });
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8">
+    <div className="max-w-7xl mx-auto py-8">
       <div className="text-center mb-10">
-          <h2 className="text-3xl font-bold text-gray-800">More Facilities</h2>
-        </div>
+        <h2 className="text-3xl font-bold text-gray-800">More Facilities</h2>
+      </div>
       <div ref={sliderRef} className="keen-slider">
         {services.map((s, i) => (
           <div
             key={i}
-            className="keen-slider__slide group bg-white hover:bg-gray-50 transition-colors duration-200 rounded-lg shadow-md overflow-hidden"
+            className="keen-slider__slide group bg-transparent hover:bg-white hover:shadow-xl transition-all duration-300 overflow-hidden"
           >
             {/* Image with overlay */}
-            <div className="relative w-full h-64 overflow-hidden">
+            <div className="relative w-full aspect-[4/3] sm:aspect-[4/2.5] overflow-hidden">
               <Image
                 src={s.image}
                 alt={s.title}
