@@ -3,6 +3,40 @@
 import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
 import Image from "next/image";
+import { KeenSliderInstance } from "keen-slider";
+
+function AutoplayPlugin(slider: KeenSliderInstance) {
+  let timeout: ReturnType<typeof setTimeout>;
+  let mouseOver = false;
+
+  function clearNextTimeout() {
+    clearTimeout(timeout);
+  }
+
+  function nextTimeout() {
+    clearTimeout(timeout);
+    if (mouseOver) return;
+    timeout = setTimeout(() => {
+      slider.next();
+    }, 2000); // 2 seconds
+  }
+
+  slider.on("created", () => {
+    slider.container.addEventListener("mouseover", () => {
+      mouseOver = true;
+      clearNextTimeout();
+    });
+    slider.container.addEventListener("mouseout", () => {
+      mouseOver = false;
+      nextTimeout();
+    });
+    nextTimeout();
+  });
+
+  slider.on("dragStarted", clearNextTimeout);
+  slider.on("animationEnded", nextTimeout);
+  slider.on("updated", nextTimeout);
+}
 
 const services = [
   {
@@ -38,15 +72,23 @@ const services = [
 
 export default function CarouselComponent() {
   const [sliderRef] = useKeenSlider<HTMLDivElement>({
-    slides: {
-      perView: 3,
-      spacing: 20,
+  loop: true,
+  slides: {
+    perView: 3,
+    spacing: 40,
+  },
+  breakpoints: {
+    '(max-width: 768px)': {
+      slides: {
+        perView: 1,
+        spacing: 20,
+      },
     },
-    loop: false,
-  });
+  },
+}, [AutoplayPlugin]);
 
   return (
-    <div className="max-w-7xl mx-auto py-8">
+    <div className="max-w-7xl mx-auto py-8 px-4">
       <div className="text-center mb-10">
         <h2 className="text-3xl font-bold text-gray-800">More Facilities</h2>
       </div>
@@ -54,7 +96,7 @@ export default function CarouselComponent() {
         {services.map((s, i) => (
           <div
             key={i}
-            className="keen-slider__slide group bg-transparent hover:bg-white hover:shadow-xl transition-all duration-300 overflow-hidden"
+            className="keen-slider__slide group bg-transparent hover:bg-white hover:shadow-xl duration-100 overflow-hidden"
           >
             {/* Image with overlay */}
             <div className="relative w-full aspect-[4/3] sm:aspect-[4/2.5] overflow-hidden">
@@ -76,7 +118,7 @@ export default function CarouselComponent() {
 
             {/* Text content */}
             <div className="p-4">
-              <h3 className="text-lg font-semibold text-purple-800 mb-2">
+              <h3 className="text-lg font-semibold text-purple-800">
                 {s.title}
               </h3>
               <p className="text-sm text-gray-600">{s.description}</p>
